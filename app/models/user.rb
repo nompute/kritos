@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   validates_presence_of :login, :email, :password, :password_confirmation
   validates_uniqueness_of :login
   validates_length_of :password, :within => 3..20
+  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"
 
   attr_accessor :password_confirmation
   validates_confirmation_of :password
@@ -24,7 +25,7 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate(name, pwd)
-    user = self.find_by_name(name)
+    user = self.find_by_login(name)
     if user
       expected_password = encrypted_password(pwd, user.salt)
       if user.hashed_password != expected_password
