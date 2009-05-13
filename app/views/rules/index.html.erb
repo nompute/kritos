@@ -1,0 +1,22 @@
+<h1>Listing Rules</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Deduction</th>
+  </tr>
+
+<% @rules.each do |rule| %>
+  <tr>
+    <td><%=h rule.name %></td>
+    <td><%=h rule.description %></td>
+    <td><%=h rule.deduction %></td>
+    <td><%= link_to 'Delete', rule, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New rule', new_rule_path %>

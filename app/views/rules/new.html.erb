@@ -1,0 +1,22 @@
+<h1>New Rule</h1>
+
+<% form_for(@rule) do |r| %>
+  <%= r.error_messages %>
+
+  <p>
+  <%= r.label :name %><br />
+  <%= r.text_field :name %>
+  </p>
+
+  <p>
+  <%= r.label :description %><br />
+  <%= r.text_field :description %>
+  </p>
+
+  <p>
+  <%= r.label :deduction %><br />
+  <%= r.text_field :deduction %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', rules_path %>

@@ -18,6 +18,11 @@
   <%=h @user.salt %>
 </p>
 
+<p>
+  <b>Role:</b>
+  <%=h Role.find_by_id(@user.role_id) %>
+</p>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
