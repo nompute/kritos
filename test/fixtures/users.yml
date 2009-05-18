@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  login: admin
+  hashed_password: a5a2ffd51137bb541dbe42860703176d376d8dfd
+  salt: 1000
+
+two:
+  login: foo
+  hashed_password: 5332c68f78826fb611b7e81032cde22ca9165d40
+  salt: 1000
