@@ -1,0 +1,18 @@
+<p>
+  <b>Name:</b>
+  <%=h @competition.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @competition.description %>
+</p>
+
+<p>
+  <b>Ruleset:</b>
+  <%=h @competition.ruleset_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_competition_path(@competition) %> |
+<%= link_to 'Back', competitions_path %>

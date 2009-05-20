@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%=h @ruleset.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @ruleset.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_ruleset_path(@ruleset) %> |
+<%= link_to 'Back', rulesets_path %>

@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   belongs_to :role
 
   validates_presence_of :login, :email, :password, :password_confirmation
-  validates_uniqueness_of :login
+  validates_uniqueness_of :login, :email
   validates_length_of :password, :within => 3..20
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"
 

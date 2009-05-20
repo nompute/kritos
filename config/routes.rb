@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :rulesets
+
+  map.resources :events
+
+  map.resources :competitions
+
 
   map.connect 'users/login', :controller => 'users', :action => 'login'
   map.connect 'users/logout', :controller => 'users', :action => 'logout'

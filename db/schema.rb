@@ -9,16 +9,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090508035426) do
+ActiveRecord::Schema.define(:version => 20090518012203) do
+
+  create_table "competitions", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "competition_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "permissions", :force => true do |t|
     t.string "name"
     t.string "description"
-  end
-
-  create_table "permissions_roles", :id => false, :force => true do |t|
-    t.integer "permission_id"
-    t.integer "role_id"
   end
 
   create_table "roles", :force => true do |t|
@@ -30,6 +40,13 @@ ActiveRecord::Schema.define(:version => 20090508035426) do
     t.string  "name"
     t.string  "description"
     t.decimal "deduction",   :precision => 3, :scale => 2
+  end
+
+  create_table "rulesets", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
