@@ -9,11 +9,11 @@
     <th>Role ID</th>
   </tr>
 
-<% @users.each do |user| %>
+<% User.all.each do |user| %>
   <tr>
     <td><%=h user.login %></td>
     <td><%=h user.email %></td>
-    <td><%=h user.hashed_password %></td>
+    <td><%=h user.crypted_password %></td>
     <td><%=h user.salt %></td>
     <td>
       <%= user.role.name if not user.role.nil? %>

@@ -1,71 +1,54 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  belongs_to :role
+  include Authentication
+  include Authentication::ByPassword
+  include Authentication::ByCookieToken
 
-  validates_presence_of :login, :email, :password, :password_confirmation
-  validates_uniqueness_of :login, :email
-  validates_length_of :password, :within => 3..20
-  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"
+  validates_presence_of     :login
+  validates_length_of       :login,    :within => 3..40
+  validates_uniqueness_of   :login
+  validates_format_of       :login,    :with => Authentication.login_regex, :message => Authentication.bad_login_message
 
-  attr_accessor :password_confirmation
-  validates_confirmation_of :password
+  validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
+  validates_length_of       :name,     :maximum => 100
 
-  validate :password_not_blank
+  validates_presence_of     :email
+  validates_length_of       :email,    :within => 6..100 #r@a.wk
+  validates_uniqueness_of   :email
+  validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
 
-  def password=(pwd)
-    @password = pwd
-    return if pwd.blank?
-    create_new_salt
-    self[:hashed_password] = User.encrypted_password(self.password, self.salt)
+  belongs_to :role  
+
+  # HACK HACK HACK -- how to do attr_accessible from here?
+  # prevents a user from submitting a crafted form that bypasses activation
+  # anything else you want your user to change should be added here.
+  attr_accessible :login, :email, :name, :password, :password_confirmation
+
+
+
+  # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
+  #
+  # uff.  this is really an authorization, not authentication routine.  
+  # We really need a Dispatch Chain here or something.
+  # This will also let us return a human error message.
+  #
+  def self.authenticate(login, password)
+    return nil if login.blank? || password.blank?
+    u = find_by_login(login.downcase) # need to get the salt
+    u && u.authenticated?(password) ? u : nil
   end
 
-  def password
-    @password
+  def login=(value)
+    write_attribute :login, (value ? value.downcase : nil)
   end
 
-  def self.authenticate(name, pwd)
-    user = self.find_by_login(name)
-    if user
-      expected_password = encrypted_password(pwd, user.salt)
-      if user.hashed_password != expected_password
-        user = nil
-      end
-    end
-    user
+  def email=(value)
+    write_attribute :email, (value ? value.downcase : nil)
   end
 
-  def method_missing(method_id, *args)
-    if match = matches_dynamic_role_check?(method_id)
-      tokenize_roles(match.captures.first).each do |check|
-        return true if role.name.downcase == check
-      end
-      return false
-    else
-      super
-    end
-  end
+  protected
+    
 
-  private
 
-  def password_not_blank
-    errors.add_to_base("Missing password") if hashed_password.blank?
-  end
-
-  def self.encrypted_password(pwd, salt)
-    string_to_hash = pwd + 'wushu' + salt
-    Digest::SHA1.hexdigest(string_to_hash)
-  end
-
-  def create_new_salt
-    self.salt = self.object_id.to_s + rand.to_s
-  end
-
-  def matches_dynamic_role_check?(method_id)
-    /^is_an?_([a-zA-Z]\w*)\?$/.match(method_id.to_s)
-  end
-
-  def tokenize_roles(split_str)
-    split_str.split(/_or_/)
-  end
 end
