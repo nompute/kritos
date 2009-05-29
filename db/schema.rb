@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090526035409) do
+ActiveRecord::Schema.define(:version => 20090527222518) do
 
   create_table "competitions", :force => true do |t|
     t.string   "name"
@@ -33,8 +33,15 @@ ActiveRecord::Schema.define(:version => 20090526035409) do
 
   create_table "roles", :force => true do |t|
     t.string "name"
-    t.string "description"
   end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
+
+  add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
+  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
   create_table "rules", :force => true do |t|
     t.string  "name"
@@ -55,7 +62,6 @@ ActiveRecord::Schema.define(:version => 20090526035409) do
     t.string   "email",                     :limit => 100
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
-    t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_token",            :limit => 40

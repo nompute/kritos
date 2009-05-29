@@ -15,9 +15,7 @@
     <td><%=h user.email %></td>
     <td><%=h user.crypted_password %></td>
     <td><%=h user.salt %></td>
-    <td>
-      <%= user.role.name if not user.role.nil? %>
-    </td>
+    <td><%=h user.roles[0].name if not user.roles.nil? %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
