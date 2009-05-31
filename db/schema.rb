@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090527222518) do
+ActiveRecord::Schema.define(:version => 20090531051117) do
 
   create_table "competitions", :force => true do |t|
     t.string   "name"
@@ -17,6 +17,22 @@ ActiveRecord::Schema.define(:version => 20090527222518) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "competitions_events", :id => false, :force => true do |t|
+    t.integer "competition_id"
+    t.integer "event_id"
+  end
+
+  add_index "competitions_events", ["competition_id"], :name => "index_competitions_events_on_competition_id"
+  add_index "competitions_events", ["event_id"], :name => "index_competitions_events_on_event_id"
+
+  create_table "competitions_users", :id => false, :force => true do |t|
+    t.integer "competition_id"
+    t.integer "user_id"
+  end
+
+  add_index "competitions_users", ["competition_id"], :name => "index_competitions_users_on_competition_id"
+  add_index "competitions_users", ["user_id"], :name => "index_competitions_users_on_user_id"
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -48,6 +64,14 @@ ActiveRecord::Schema.define(:version => 20090527222518) do
     t.string  "description"
     t.decimal "deduction",   :precision => 3, :scale => 2
   end
+
+  create_table "rules_rulesets", :id => false, :force => true do |t|
+    t.integer "rule_id"
+    t.integer "ruleset_id"
+  end
+
+  add_index "rules_rulesets", ["rule_id"], :name => "index_rules_rulesets_on_rule_id"
+  add_index "rules_rulesets", ["ruleset_id"], :name => "index_rules_rulesets_on_ruleset_id"
 
   create_table "rulesets", :force => true do |t|
     t.string   "name"

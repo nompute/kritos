@@ -1,0 +1,4 @@
+event_1:
+  id: 1
+  name: Random Event
+  description: This is a random event.

@@ -1,0 +1,11 @@
+test_rule_1:
+  id: 1
+  name: Test Rule 1
+  description: This is a testing rule.
+  deduction: 0.1
+
+test_rule_2:
+  id: 2
+  name: Test Rule 2
+  description: This is a testing rule.
+  deduction: 0.2

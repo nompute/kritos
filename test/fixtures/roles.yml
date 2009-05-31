@@ -1,6 +1,4 @@
-admin_role:
-  id: 1
+admin:
   name: admin
-user_role:
-  id: 2
+user:
   name: user
