@@ -1,26 +1,25 @@
-<h1>Listing users</h1>
+<h1>Users</h1>
 
-<table>
+<table id="users-list-table">
   <tr>
     <th>Login</th>
     <th>Email</th>
-    <th>Hashed password</th>
-    <th>Salt</th>
-    <th>Role ID</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    </th></th>
   </tr>
 
 <% @users.each do |user| %>
   <tr>
     <td><%=h user.login %></td>
     <td><%=h user.email %></td>
-    <td><%=h user.hashed_password %></td>
-    <td><%=h user.salt %></td>
     <td>
       <%= user.role.name if not user.role.nil? %>
     </td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
@@ -28,3 +27,6 @@
 <br />
 
 <%= link_to 'New user', new_user_path %>
+<script>
+var usersTable = new UsersTable('users-list-table');
+</script>

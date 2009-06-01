@@ -1,9 +1,14 @@
 body { background-color: #fff; color: #333; }
 
-body, p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size:   13px;
-  line-height: 18px;
+body {
+  font-family: arial, sans-serif;
+  font-size: 84%;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-weight: normal;
 }
 
 pre {
@@ -52,3 +57,22 @@ a:hover { color: #fff; background-color:#000; }
   list-style: square;
 }
 
+#header {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+#user-links {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+}
+
+/*** Users styles ***/
+#users-list-table th {
+  text-align: left;
+}
+
+#users-list-table td {
+  padding: 3px 10px 3px 0;
+}

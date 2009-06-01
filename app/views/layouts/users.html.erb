@@ -8,7 +8,12 @@
   <%= stylesheet_link_tag 'scaffold' %>
 </head>
 <body>
-
+<div id="header">
+  <span>Users</span>
+  <div id="user-links">
+    <b><%=h User.find_by_id(session[:user_id]).login %></b> | <a href="">Setup</a> | <%= link_to 'Sign Out', 'users/logout' %>
+  </div>
+</div>
 <p style="color: green"><%= flash[:notice] %></p>
 
 <%= yield %>
