@@ -1,11 +1,15 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
+admin:
   login: admin
-  hashed_password: a5a2ffd51137bb541dbe42860703176d376d8dfd
-  salt: 1000
+  email: admin@example.com
+  salt: 5788d690b5a976bb5965a77b049b1d910e727148
+  crypted_password: db292e80f5631244d35d5613a3f0b91b3d4fbf4d #foobar
+  # activation_code: adminscode # only if you're activating new signups
+  created_at: <%= 1.days.ago.to_s :db %>
+  roles: admin, user
 
-two:
-  login: foo
-  hashed_password: 5332c68f78826fb611b7e81032cde22ca9165d40
-  salt: 1000
+joe:
+  login: joe
+  email: joe@foo.com
+  salt: 28970d6a114be09645bb70f7b0499dec3a456343
+  crypted_password: 81dfab748ffa4320df059b72ff42a0f29a34a167 #foobar
+  roles: user

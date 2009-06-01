@@ -1,0 +1,6 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+test_comp:
+  id: 1
+  name: Test Competition
+  users: joe
