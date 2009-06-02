@@ -11,10 +11,12 @@
 <div id="header">
   <span>Users</span>
   <div id="user-links">
-    <b><%=h User.find_by_id(session[:user_id]).login %></b> | <a href="">Setup</a> | <%= link_to 'Sign Out', 'users/logout' %>
+	<% if self.logged_in? %>
+    <b><%=h self.current_user.login %></b> 
+    <% end %>| <a href="">Setup</a> | <%= link_to 'Sign Out', '/logout' %>
   </div>
 </div>
-<p style="color: green"><%= flash[:notice] %></p>
+<!--<p style="color: green"><%= flash[:notice] %></p>-->
 
 <%= yield %>
 

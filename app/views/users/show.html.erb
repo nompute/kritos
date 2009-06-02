@@ -1,3 +1,6 @@
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+
 <p>
   <b>Login:</b>
   <%=h @user.login %>
@@ -10,7 +13,7 @@
 
 <!--<p>
   <b>Hashed password:</b>
-  <%=h @user.hashed_password %>
+  <%=h @user.crypted_password %>
 </p>
 
 <p>
@@ -19,10 +22,6 @@
 </p>-->
 
 <p>
-  <b>Role:</b>
-  <%=h Role.find_by_id(@user.role_id) %>
+  <b>Roles:</b>
+  <%=h @roles.collect {|r| r.name } * ', ' %>
 </p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>

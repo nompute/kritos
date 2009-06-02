@@ -1,6 +1,6 @@
 <h1>Editing user</h1>
 
-<% form_for(@user) do |f| %>
+<% form_for :user do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -8,15 +8,23 @@
     <%= f.text_field :login %>
   </p>
   <p>
-    <%= f.label :hashed_password %><br />
-    <%= f.text_field :hashed_password %>
+    <%= f.label :crypted_password %><br />
+    <%= f.text_field :crypted_password %>
   </p>
   <p>
     <%= f.label :salt %><br />
     <%= f.text_field :salt %>
   </p>
   <p>
-    <%= f.submit 'Update' %>
+    <%= label_tag 'role' %><br/>
+	<select id="user_roles" name="user[roles]" multiple>
+	  <% @roles.each do |r| %>
+	  <option value="<%= r.id %>"><%= r.name %>
+	  <% end %>
+	</select>
+  </p>
+  <p>
+    <%= f.submit 'Save' %>
   </p>
 <% end %>
 
