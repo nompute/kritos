@@ -1,6 +1,6 @@
 <h1>Editing user</h1>
 
-<% form_for :user do |f| %>
+<% form_for(@user) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -15,14 +15,14 @@
     <%= f.label :salt %><br />
     <%= f.text_field :salt %>
   </p>
-  <p>
-    <%= label_tag 'role' %><br/>
-	<select id="user_roles" name="user[roles]" multiple>
-	  <% @roles.each do |r| %>
-	  <option value="<%= r.id %>"><%= r.name %>
-	  <% end %>
-	</select>
-  </p>
+  <%= label_tag 'role' %><br/>
+    <ul>
+      <% for role in @roles %>
+      <li>
+      <%= check_box_tag "user[roles][]", role.id, @user.roles.include?(role)%> <%= role.name %>
+      </li>
+    <% end %>
+    </ul>
   <p>
     <%= f.submit 'Save' %>
   </p>

@@ -31,6 +31,19 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
     @roles = Role.find(:all)
   end
+
+  def update
+    @user = User.find_by_id(params[:id])
+    @roles = Role.find(params[:user][:roles]) if params[:user][:roles]
+    @user.roles = @roles || []
+
+    if @user.save
+      flash[:notice] = 'User successfully updated.'
+      redirect_to :action => 'show', :id => @user.id
+    else
+      flash[:error] = 'There was an error updating the user.'
+    end
+  end
   
   def show
     @user = User.find_by_id(params[:id])

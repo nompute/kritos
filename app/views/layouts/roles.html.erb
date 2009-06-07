@@ -11,7 +11,10 @@
 <div id="header">
   <span>Roles</span>
   <div id="user-links">
-    <b>scottyb</b> | <a href="">Setup</a> | <a href="">Sign Out</a>
+    <% if self.logged_in? %>
+      <b><%=h self.current_user.login %></b>
+    <% end %> | <a href="">Setup</a>
+    | <a href="">Setup</a> | <a href="">Sign Out</a>
   </div>
 </div>
 
