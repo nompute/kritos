@@ -68,6 +68,12 @@ a:hover { color: #fff; background-color:#000; }
   top: 8px;
 }
 
+#header-links {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+}
+
 /*** Users styles ***/
 #users-list-table th {
   text-align: left;

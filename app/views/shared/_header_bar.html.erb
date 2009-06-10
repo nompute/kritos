@@ -1,0 +1,9 @@
+<% if logged_in? -%>
+  <div id="header-links">
+    <b><%= current_user.login %></b> | <%= link_to 'Sign Out', '/logout' %>
+  </div>
+<% else -%>
+  <div id="header-links">
+    <%= link_to 'Sign In', '/login' %>
+  </div>
+<% end -%>
