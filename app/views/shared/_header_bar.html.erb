@@ -1,6 +1,10 @@
 <% if logged_in? -%>
   <div id="header-links">
-    <b><%= current_user.login %></b> | <%= link_to 'Sign Out', '/logout' %>
+    <b><%= current_user.login %></b> | 
+    <% if_admin? do %>
+      <%= link_to 'admin', '/admin' %> | 
+    <% end %>
+    <%= link_to 'Sign Out', '/logout' %>
   </div>
 <% else -%>
   <div id="header-links">

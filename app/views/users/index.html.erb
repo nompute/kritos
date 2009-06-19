@@ -4,7 +4,7 @@
   <tr>
     <th>Login</th>
     <th>Email</th>
-    <th></th>
+    <th>Role</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,9 +14,7 @@
   <tr>
     <td><%=h user.login %></td>
     <td><%=h user.email %></td>
-    <td><%=h user.crypted_password %></td>
-    <td><%=h user.salt %></td>
-    <td><%=h user.roles[0].name if not user.roles.nil? %></td>
+    <td><%=h user.has_role?("admin") ? "admin" : "user" %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete %></td>
